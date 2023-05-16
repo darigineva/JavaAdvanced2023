@@ -1,0 +1,35 @@
+package JAVA.JAVA_ADVANCED.StackAndQueue;
+
+import java.util.*;
+
+public class BasicQueueOperations {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] arr = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int dequeCount = arr[0];
+        int elementsToPopCount = arr[1];
+        int checkElement = arr[2];
+        if(dequeCount == elementsToPopCount) {
+            System.out.println(0);
+            return;
+        }
+        int[] numbers = Arrays.stream(scanner.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
+
+        ArrayDeque<Integer> queue = new ArrayDeque<>();
+        for (int i = 0; i <numbers.length ; i++) {
+            queue.add(numbers[i]);
+        }
+        for (int i = 0; i < elementsToPopCount; i++) {
+            queue.poll();
+        }
+        if(queue.contains(checkElement)){
+            System.out.println(true);
+        } else{
+//            PriorityQueue<Integer> priority = new PriorityQueue<>(stack);      //Първи начин
+//            System.out.println(priority.element());
+            System.out.println(Collections.min(queue));      // Втори начин
+//            System.out.println(stack.stream().min(Integer::compare).get());      // Трети начин
+//            System.out.println(stack.stream().mapToInt(e -> e).min().getAsInt());   //Четвърти начин
+        }
+    }
+}
