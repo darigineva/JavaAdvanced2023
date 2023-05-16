@@ -1,0 +1,30 @@
+package ADVANCED.StackAndQueue;
+
+import java.util.ArrayDeque;
+import java.util.Scanner;
+
+public class PrinterQueue {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        ArrayDeque<String> queuePrinter = new ArrayDeque<>();
+        String file = scanner.nextLine();
+        while (!file.equals("print")){
+            if(file.equals("cancel")){
+                if(queuePrinter.size() > 0){
+                System.out.println("Canceled " + queuePrinter.poll());
+                } else {
+                    System.out.println("Printer is on standby");
+                }
+            } else {
+                queuePrinter.add(file);
+            }
+            file = scanner.nextLine();
+        }
+        while (!queuePrinter.isEmpty()) {
+            System.out.println(queuePrinter.getFirst());
+            queuePrinter.remove();
+        }
+    }
+
+}
