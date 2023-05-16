@@ -1,0 +1,46 @@
+package ADVANCED.MultidimensionalArrays;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class WrongMeasurements {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int rows = Integer.parseInt(scanner.nextLine());
+        int[][] matrix = new int[rows][];
+        int length = 0;
+        for (int i = 0; i < rows; i++) {
+            int[] arr = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+            matrix[i] = arr;
+            length = arr.length;
+        }
+        int[][] validMatrix = new int[rows][length];
+        int[] indexes = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int number = matrix[indexes[0]][indexes[1]];
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < length; col++) {
+                int sum = 0;
+                if(matrix[row][col] == number){
+                    if(row > 0 && matrix[row - 1][col] != number)
+                        sum += matrix[row - 1][col];
+                    if(row < rows - 1 && matrix[row + 1][col] != number)
+                        sum += matrix[row + 1][col];
+                    if(col > 0 && matrix[row][col - 1] != number)
+                        sum += matrix[row][col - 1];
+                    if(col < length - 1 && matrix[row][col + 1] != number)
+                        sum += matrix[row][col + 1];
+                    validMatrix[row][col] = sum;
+                } else {
+                    validMatrix[row][col] = matrix[row][col];
+                }
+            }
+        }
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < length; col++) {
+                System.out.print(String.join(" ", validMatrix[row][col] + " "));
+            }
+            System.out.println();
+        }
+    }
+}
