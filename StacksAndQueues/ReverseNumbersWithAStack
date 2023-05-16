@@ -1,0 +1,17 @@
+package JAVA.JAVA_ADVANCED.StackAndQueue;
+
+import java.util.*;
+
+public class ReverseNumbersWithAStack {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        ArrayDeque<Integer> stack = new ArrayDeque<>();
+        int[] numbers = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+       for (int a : numbers)
+           stack.push(a);
+        while (!stack.isEmpty()){
+            System.out.print(stack.pop() + " ");
+        }
+    }
+}
