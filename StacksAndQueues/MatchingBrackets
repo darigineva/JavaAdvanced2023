@@ -1,0 +1,23 @@
+package ADVANCED.StackAndQueue;
+
+import java.util.ArrayDeque;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class MatchingBrackets {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String line = scanner.nextLine();
+        ArrayDeque<Integer> bracketsIndexes = new ArrayDeque<>();
+
+        for (int i = 0; i < line.length(); i++) {
+            if(line.charAt(i) == '('){
+                bracketsIndexes.push(i);
+            } else if(line.charAt(i) == ')'){
+                System.out.println(line.substring(bracketsIndexes.pop(), i + 1));
+            }
+        }
+    }
+}
