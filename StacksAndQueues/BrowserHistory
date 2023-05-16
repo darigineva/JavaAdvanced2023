@@ -1,0 +1,27 @@
+package ADVANCED.StackAndQueue;
+
+import java.util.ArrayDeque;
+import java.util.Scanner;
+
+public class BrowserHistory {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        ArrayDeque<String> stackURL = new ArrayDeque<>();
+        String url = scanner.nextLine();
+        while (!url.equals("Home")){
+            if(!url.equals("back")){
+                stackURL.push(url);
+                System.out.println(url);
+            } else {
+                if(stackURL.size() > 1){
+                    String currentURL = stackURL.pop();
+                    System.out.println(stackURL.peek());
+                } else {
+                    System.out.println("no previous URLs");
+                }
+            }
+            url = scanner.nextLine();
+        }
+    }
+}
