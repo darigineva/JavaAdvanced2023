@@ -1,0 +1,30 @@
+package JAVA.JAVA_ADVANCED.MultidimensionalArrays;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class MatrixOfPalindromes {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] n = Arrays.stream(scanner.nextLine().split("\\s+"))
+                .mapToInt(Integer::parseInt).toArray();
+        int rows = n[0];
+        int cols = n[1];
+        int indexOfLetter = 97;
+        String[][] matrix = new String[rows][cols];
+        for (int row = 0; row < rows; row++) {
+            int indexOfSecondLetter = indexOfLetter;
+            for (int col = 0; col < cols; col++) {
+                String element = "";
+                element += (char)indexOfLetter;
+                element +=(char)(indexOfSecondLetter++);
+                element += (char)indexOfLetter;
+                matrix[row][col] = element;
+            }
+            indexOfLetter++;
+        }
+        for (String[] a : matrix) {
+            System.out.println(String.join(" ", a));
+        }
+    }
+}
