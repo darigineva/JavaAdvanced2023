@@ -1,0 +1,87 @@
+package ADVANCED.MultidimensionalArrays;
+
+import java.util.Scanner;
+
+public class FindTheRealQueen {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String[][] matrix = new String[8][8];
+
+        for (int i = 0; i < 8; i++) {
+            matrix[i] = scanner.nextLine().split(" ");
+        }
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (matrix[i][j].equals("q")) {
+                    matrix[i][j] = "*";
+                    int row = i;
+                    int col = j;
+                    if (!searchInRow(matrix, row))
+                        if (!searchInColumn(matrix, col))
+                            if (!Diagonals(matrix, row, col)) {
+                                System.out.println(row + " " + col);
+                                return;
+                            }
+                    matrix[i][j] = "q";
+                }
+            }
+        }
+    }
+    private static boolean Diagonals(String[][] matrix, int row, int col) {
+        if(UpLeftDiagonal(matrix, row, col) ||
+        UpRightDiagonal(matrix, row, col) ||
+        DownRightDiagonal(matrix, row, col) ||
+        DownLeftDiagonal(matrix, row, col))
+            return true;
+        return false;
+    }
+    private static boolean UpLeftDiagonal(String[][] matrix, int row, int col) {
+        if (!inBounds(matrix, row, col))
+            return false;
+        if(matrix[row][col].equals("q"))
+            return true;
+       return UpLeftDiagonal(matrix, row - 1, col - 1);
+    }
+    private static boolean UpRightDiagonal(String[][] matrix, int row, int col) {
+        if (!inBounds(matrix, row, col))
+            return false;
+        if(matrix[row][col].equals("q"))
+            return true;
+        return UpRightDiagonal(matrix, row - 1, col + 1);
+    }
+    private static boolean DownLeftDiagonal(String[][] matrix, int row, int col) {
+        if (!inBounds(matrix, row, col))
+            return false;
+        if(matrix[row][col].equals("q"))
+            return true;
+        return DownLeftDiagonal(matrix, row + 1, col - 1);
+    }
+    private static boolean DownRightDiagonal(String[][] matrix, int row, int col) {
+        if (!inBounds(matrix, row, col))
+            return false;
+        if(matrix[row][col].equals("q"))
+            return true;
+        return DownRightDiagonal(matrix, row + 1, col + 1);
+    }
+    private static boolean inBounds(String[][] matrix, int row, int col) {
+        return row >= 0 && row < 8 && col >= 0 && col < 8;
+    }
+    private static boolean searchInColumn(String[][] matrix, int col) {
+        for (int i = 0; i < 8; i++) {
+            if (matrix[i][col].equals("q")) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private static boolean searchInRow(String[][] matrix, int row) {
+        for (int i = 0; i < 8; i++) {
+            if (matrix[row][i].equals("q")) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
